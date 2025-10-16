@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
 @Getter
 public class Order {
      private List<Book> books;
@@ -58,5 +59,9 @@ public class Order {
 
      public boolean containHog() {
           return books.containsAll(BookEnum.getBooks());
+     }
+
+     public int getAvailableBookSize() {
+          return (int) books.stream().distinct().count();
      }
 }

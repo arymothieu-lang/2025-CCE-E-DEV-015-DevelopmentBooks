@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 public class MatrixUtils {
 
+    final static double[] discountVector={0,0.05,0.1,0.2,0.25};
+
     //The goal here is to create a Matrix A such as A * X= Y
     // with Y column Matrix with each element equal basket size
 
@@ -39,5 +41,25 @@ public class MatrixUtils {
             backtrack(X, index + 1, remaining - Ai * Xi, currentLine, resultsMatrix);
         }
 
+    }
+
+
+    public static double  getMinPrice(Order order){
+        return generateMatrixA(order.getAvailableBookSize(),order.getBooks().size())
+                .stream()
+                .map(MatrixUtils::vectorPrice)
+                .min(Double::compareTo)
+                .orElse(0d);
+    }
+
+    static double vectorPrice(int[] vector){
+        if (null==vector){
+            return 0d;
+        }
+        var sum=0d;
+        for (int i = 0; i < vector.length; i++) {
+            sum=sum+vector[i]*(i+1)*(1-discountVector[i]);
+        }
+        return sum;
     }
 }
