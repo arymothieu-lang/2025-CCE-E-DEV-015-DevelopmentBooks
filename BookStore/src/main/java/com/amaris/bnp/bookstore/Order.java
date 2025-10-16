@@ -12,12 +12,20 @@ public class Order {
           books= Collections.emptyList();
      }
 
+     public Order(List<Book> books) {
+          this.books=books;
+     }
+
      public Order(Book ... books) {
           this.books=List.of(books);
      }
 
      public Double getPrice() {
+
           double discount=0;
+          if (books.size()==5){
+               discount=.25;
+          }
           if (books.size()==4){
                discount=.2;
           }

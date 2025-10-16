@@ -1,5 +1,6 @@
 package com.amaris.bnp.bookstore.service;
 
+import com.amaris.bnp.bookstore.Book;
 import com.amaris.bnp.bookstore.BookEnum;
 import com.amaris.bnp.bookstore.Order;
 import org.junit.jupiter.api.Test;
@@ -7,6 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -59,6 +62,15 @@ public class OrderServiceTest {
         final var order = new Order(book1, book2,book3,book4);
         var price = orderService.getPrice(order);
         assertEquals(160,price);
+    }
+
+    @Test
+    public void shouldApply25percentDiscountOnFinalPriceForTheHoleHog(){
+        List<Book> hogBooks = BookEnum.getBooks();
+        final var order=new Order(hogBooks);
+        final var price = orderService.getPrice(order);
+        assertEquals(187.5,price);
+
     }
 
 
