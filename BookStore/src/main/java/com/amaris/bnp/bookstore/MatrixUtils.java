@@ -23,19 +23,18 @@ public class MatrixUtils {
     }
 
     private static void backtrack(int[] X, int index, int remaining, int[] currentLine, List<int[]> resultsMatrix) {
-        // condition d'arrêt
+        // stopping condition
         if (index == X.length) {
             if (remaining == 0) {
-                // une seule copie finale
                 resultsMatrix.add(currentLine.clone());
             }
             return;
         }
-        // bornage pour limiter les combinaisons inutiles
+        // uper bound to limit the number of combinason
         int Xi = X[index];
         int maxAi = remaining / Xi;
 
-        // exploration des coefficients possibles à cet index
+        // exploration of different coefficient for each index after the given one
         for (int Ai = 0; Ai <= maxAi; Ai++) {
             currentLine[index] = Ai;
             backtrack(X, index + 1, remaining - Ai * Xi, currentLine, resultsMatrix);
@@ -47,12 +46,12 @@ public class MatrixUtils {
     public static double  getMinPrice(Order order){
         return generateMatrixA(order.getAvailableBookSize(),order.getBooks().size())
                 .stream()
-                .map(MatrixUtils::vectorPrice)
+                .map(MatrixUtils::getPriceVector)
                 .min(Double::compareTo)
                 .orElse(0d);
     }
 
-    static double vectorPrice(int[] vector){
+    static double getPriceVector(int[] vector){
         if (null==vector){
             return 0d;
         }
