@@ -12,8 +12,8 @@ public class Order {
           books= Collections.emptyList();
      }
 
-     public Order(Book book) {
-          books=List.of(book);
+     public Order(Book ... books) {
+          this.books=List.of(books);
      }
 
      public Double getPrice() {
