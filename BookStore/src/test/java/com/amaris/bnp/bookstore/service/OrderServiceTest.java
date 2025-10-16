@@ -108,6 +108,4 @@ public class OrderServiceTest {
         final var price=orderService.getPrice(order);
         assertEquals(320,price);
     }
-
-
 }
