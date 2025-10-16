@@ -18,6 +18,9 @@ public class Order {
 
      public Double getPrice() {
           double discount=0;
+          if (books.size()==3){
+               discount=.1;
+          }
           if (books.size()==2){
                discount=.05;
           }
