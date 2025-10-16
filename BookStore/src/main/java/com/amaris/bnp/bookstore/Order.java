@@ -15,4 +15,12 @@ public class Order {
      public Order(Book book) {
           books=List.of(book);
      }
+
+     public Double getPrice() {
+          return books.stream()
+                  .map(Book::getPrice)
+                  .reduce(Double::sum)
+                  .orElse(0d);
+
+     }
 }

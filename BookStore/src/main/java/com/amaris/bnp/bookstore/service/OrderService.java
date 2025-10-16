@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService {
     public Double getPrice(Order order) {
-        return 0d;
+        return order.getPrice();
+
     }
 }

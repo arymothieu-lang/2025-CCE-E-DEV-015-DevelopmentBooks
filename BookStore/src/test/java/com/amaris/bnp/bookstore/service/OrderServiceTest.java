@@ -29,6 +29,6 @@ public class OrderServiceTest {
         final Order order=new Order(book.getBook());
         final var result=orderService.getPrice(order);
         assertEquals(50f,result);
-
     }
+
 }
