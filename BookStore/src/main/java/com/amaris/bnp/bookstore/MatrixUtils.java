@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class MatrixUtils {
 
-    final static double[] discountVector={0,0.05,0.1,0.2,0.25};
+    private final static double[] discountVector={0,0.05,0.1,0.2,0.25};
 
     //The goal here is to create a Matrix A such as A * X= Y
     // with Y column Matrix with each element equal basket size
