@@ -40,4 +40,15 @@ public class OrderServiceTest {
         assertEquals(95,price);
     }
 
+    @Test
+    public void shouldApply10PercentDiscountOnFinalPriceWhen3DifferentBookOrdered(){
+        final var book1 = BookEnum.CLEAN_CODE.getBook();
+        final var book2 = BookEnum.CLEAN_ARCHITECTURE.getBook();
+        final var book3 = BookEnum.TEST_DRIVEN_DEVELOPMENT.getBook();
+        final var order = new Order(book1, book2,book3);
+        var price = orderService.getPrice(order);
+        assertEquals(135,price);
+    }
+
+
 }

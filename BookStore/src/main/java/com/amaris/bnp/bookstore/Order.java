@@ -17,7 +17,11 @@ public class Order {
      }
 
      public Double getPrice() {
-          return books.stream()
+          double discount=0;
+          if (books.size()==2){
+               discount=.05;
+          }
+          return (1-discount)*books.stream()
                   .map(Book::getPrice)
                   .reduce(Double::sum)
                   .orElse(0d);
