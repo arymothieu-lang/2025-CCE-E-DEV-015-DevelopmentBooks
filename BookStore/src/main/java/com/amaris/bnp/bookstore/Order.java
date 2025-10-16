@@ -2,7 +2,10 @@ package com.amaris.bnp.bookstore;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 @Getter
 public class Order {
@@ -12,8 +15,8 @@ public class Order {
           books= Collections.emptyList();
      }
 
-     public Order(List<Book> books) {
-          this.books=books;
+     public Order(Collection<Book> books) {
+          this.books=new ArrayList<>(books);
      }
 
      public Order(Book ... books) {
@@ -23,16 +26,16 @@ public class Order {
      public Double getPrice() {
 
           double discount=0;
-          if (books.size()==5){
+          if (containHog()){
                discount=.25;
           }
-          if (books.size()==4){
+          if (containsNDifferentBook(4)){
                discount=.2;
           }
-          if (books.size()==3){
+          if (containsNDifferentBook(3)){
                discount=.1;
           }
-          if (books.size()==2){
+          if (containsNDifferentBook(2)){
                discount=.05;
           }
           return (1-discount)*books.stream()
@@ -40,5 +43,13 @@ public class Order {
                   .reduce(Double::sum)
                   .orElse(0d);
 
+     }
+
+     public boolean containsNDifferentBook(int i) {
+          return new HashSet<>(books).size() >= i;
+     }
+
+     public boolean containHog() {
+          return books.containsAll(BookEnum.getBooks());
      }
 }
