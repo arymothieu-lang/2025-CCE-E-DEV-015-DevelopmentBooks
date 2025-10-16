@@ -23,26 +23,33 @@ public class Order {
           this.books=List.of(books);
      }
 
-     public Double getPrice() {
+     public List<Order> splitOrderToDiscountSet() {
+          final List<Order> finalOrder=new ArrayList<>();
+          final Collection<Book> booksCopy = new ArrayList<>(books);
+          while (!booksCopy.isEmpty()) {
+               var bookSet = new HashSet<>(booksCopy);
+               bookSet.forEach(booksCopy::remove);
+               finalOrder.add(new Order(bookSet));
+          }
+          return finalOrder;
+     }
 
-          double discount=0;
-          if (containHog()){
-               discount=.25;
-          }
-          if (containsNDifferentBook(4)){
-               discount=.2;
-          }
-          if (containsNDifferentBook(3)){
-               discount=.1;
-          }
-          if (containsNDifferentBook(2)){
-               discount=.05;
-          }
-          return (1-discount)*books.stream()
+     public double applyDiscount() {
+          double price =this.getBooks().stream()
                   .map(Book::getPrice)
-                  .reduce(Double::sum)
-                  .orElse(0d);
-
+                  .reduce(0d, Double::sum);
+          if (this.containHog()){
+               return price-(price*0.25);
+          }
+          if (this.containsNDifferentBook(4)){
+               return price-(price*.2);
+          }
+          if (this.containsNDifferentBook(3)){
+               return price-(price*.1);
+          }
+          if (this.containsNDifferentBook(2))
+               return price-(price*0.05);
+          return price;
      }
 
      public boolean containsNDifferentBook(int i) {
