@@ -82,7 +82,31 @@ public class OrderServiceTest {
         final var order = new Order(book1, book2,book3,book4);
         var price = orderService.getPrice(order);
         assertEquals(185,price);
+    }
 
+    @Test
+    public void exampleTestProvided(){
+        //2 copy of CleanCode
+        final var cleanCode=BookEnum.CLEAN_CODE.getBook();
+        final var cleanCode2=BookEnum.CLEAN_CODE.getBook();
+        //2 copies of the Clean Coder
+        final var cleanCoderBook=BookEnum.THE_CLEAN_CODER.getBook();
+        final var cleanCoderBook2=BookEnum.THE_CLEAN_CODER.getBook();
+        //2 copies of the “Clean Architecture” book
+        final var cleanArchitectureBook=BookEnum.CLEAN_ARCHITECTURE.getBook();
+        final var cleanArchitectureBook2=BookEnum.CLEAN_ARCHITECTURE.getBook();
+        //1 copy of the “Test Driven Development by Example” book
+        final var testDrivenDevelopmentBook=BookEnum.TEST_DRIVEN_DEVELOPMENT.getBook();
+        //1 copy of the “Working effectively with Legacy Code” book
+        final var workingEffectivelyWithLegacyCodeBook=BookEnum.WORKING_EFFECTIVELY_WITH_LEGACY_CODE.getBook();
+
+        final var order=new Order(cleanCode,cleanCode2,cleanCoderBook,
+                cleanCoderBook2,
+                cleanArchitectureBook,cleanArchitectureBook2,
+                testDrivenDevelopmentBook,
+                workingEffectivelyWithLegacyCodeBook);
+        final var price=orderService.getPrice(order);
+        assertEquals(320,price);
     }
 
 
